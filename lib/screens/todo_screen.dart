@@ -125,7 +125,7 @@ class _TodoScreenState extends State<TodoScreen> {
      );
   }
 
-    void _displayTextInputDialog() async{
+  void _displayTextInputDialog() async{
   return showDialog(
     context: context, 
     builder: (context){
