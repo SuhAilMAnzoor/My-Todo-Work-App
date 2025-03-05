@@ -165,10 +165,10 @@ class _TodoScreenState extends State<TodoScreen> {
     builder: (context) {
       return Dialog(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20), // Rounded corners
+          borderRadius: BorderRadius.circular(18), // Rounded corners
         ),
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(17.0),
           child: Column(
             mainAxisSize: MainAxisSize.min, // To avoid excessive height
             children: [
@@ -177,7 +177,7 @@ class _TodoScreenState extends State<TodoScreen> {
               TextField(
                 controller: editController,
                 decoration: const InputDecoration(
-                  hintText: "Update task...",
+                  hintText: "Update Your Task Name",
                   border: OutlineInputBorder( // Rounded TextField
                     borderRadius: BorderRadius.all(Radius.circular(12)),
                   ),
@@ -195,7 +195,7 @@ class _TodoScreenState extends State<TodoScreen> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(13),
                       ),
                     ),
                     onPressed: () {
