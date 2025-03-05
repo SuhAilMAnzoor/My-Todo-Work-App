@@ -124,6 +124,37 @@ class _TodoScreenState extends State<TodoScreen> {
        ),
      );
   }
+
+    void _displayTextInputDialog() async{
+  return showDialog(
+    context: context, 
+    builder: (context){
+      return AlertDialog(
+        title: const Text("Add a todo"),
+       content: TextField(
+        controller: _textEditingController,
+        decoration: const InputDecoration(hintText: "Write Todo.."),
+       ),
+       actions: <Widget> [MaterialButton(
+        color: Theme.of(context).colorScheme.primary,
+        textColor: Colors.white,
+        child: const Text("OK"),
+        onPressed: (){
+          Todo todo = Todo(
+              task: _textEditingController.text,
+              isDone: false,
+              createdOn: Timestamp.now(),
+              updatedOn: Timestamp.now());
+          _databaseService.addTodo(todo);
+          Navigator.pop(context);
+          _textEditingController.clear();
+        },
+       )],
+      );
+    },
+    );
+  }
+  
 }
 
 
