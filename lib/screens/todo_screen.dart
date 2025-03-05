@@ -154,7 +154,72 @@ class _TodoScreenState extends State<TodoScreen> {
     },
     );
   }
-  
+
+  void _showEditDialog(String todoId, String currentTask) {
+  TextEditingController editController = TextEditingController(text: currentTask);
+
+  showDialog(
+    context: context,
+    builder: (context) {
+      return Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20), // Rounded corners
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min, // To avoid excessive height
+            children: [
+              const Text("Edit Todo", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              const SizedBox(height: 10),
+              TextField(
+                controller: editController,
+                decoration: const InputDecoration(
+                  hintText: "Update task...",
+                  border: OutlineInputBorder( // Rounded TextField
+                    borderRadius: BorderRadius.all(Radius.circular(12)),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text("Cancel"),
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    onPressed: () {
+                      String updatedTask = editController.text.trim();
+                      if (updatedTask.isNotEmpty) {
+                        Todo updatedTodo = Todo(
+                          task: updatedTask,
+                          isDone: false,
+                          createdOn: Timestamp.now(),
+                          updatedOn: Timestamp.now(),
+                        );
+                        _databaseService.updateTodo(todoId, updatedTodo);
+                      }
+                      Navigator.pop(context);
+                    },
+                    child: const Text("Save", style: TextStyle(color: Colors.white)),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
+    },
+  );
+}
 }
 
 
